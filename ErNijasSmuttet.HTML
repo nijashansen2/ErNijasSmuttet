@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Countdown Timer</title>
+<style>
+/* Centrer alt indhold */
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Styling for slide-in animation */
+@keyframes slideIn {
+    from {
+        transform: translateY(-50%) scale(0);
+        font-size: 0;
+    }
+    to {
+        transform: translateY(-50%) scale(1);
+        font-size: 150px;
+    }
+}
+
+/* Styling for h1-tagget */
+h1 {
+    margin: 0; /* Fjern ekstra margin */
+    text-align: center;
+}
+
+/* Styling for the paragraph */
+#JaNej {
+    font-size: 150px; /* Start med en stor skriftstørrelse */
+    opacity: 1; /* Start med at vise p-tagget */
+    animation: slideIn 1s ease forwards; /* Anvend slide-in animationen */
+    margin-bottom: 20px; /* Tilføj en passende margen nederst */
+}
+
+/* Styling for timer-elementet */
+#demo {
+    font-size: 100px; /* Større skriftstørrelse til countdown-teksten */
+    text-align: center;
+}
+</style>
+</head>
+<body>
+
+<div>
+    <h1>Er Nijas Smuttet?</h1>
+    <!-- P-tagget med ID 'JaNej' -->
+    <p id="JaNej">Nej</p>
+</div>
+
+<p style="font-size: 70px;">Nijas Smutter om:</p>
+<div id="demo"></div>
+
+<script>
+// Set the date we're counting down to
+var countDownDate = new Date("May 31, 2024 14:00:00").getTime();
+
+// Time calculations for days, hours, minutes and seconds
+function updateTimer() {
+  // Get today's date and time
+  var now = new Date().getTime();
+
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+
+  // If the count down is finished, write some text
+  if (distance < 0) {
+    clearInterval(x);
+    // Anvend CSS-styling for at vise p-tagget
+    document.getElementById("JaNej").innerHTML = "Ja";
+    document.getElementById("demo").innerHTML = "Nijas Smuttede den 31 Maj, Fik du sagt farvel?";
+    document.getElementById("demo").style = "font-size: 70px";
+  } else {
+    // Time calculations for days, hours, minutes and seconds
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  
+    // Display the result in the element with id="demo"
+    document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+    + minutes + "m " + seconds + "s ";
+  }
+}
+
+// Update the count down every 1 second
+var x = setInterval(updateTimer, 1000);
+
+// Kør updateTimer en gang for at opdatere timeren med det samme, når siden indlæses
+updateTimer();
+</script>
+
+</body>
+</html>
